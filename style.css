@@ -29,3 +29,21 @@ nav {
   border-radius: 20px;
   margin-left: 20px;
 }
+
+.login_input:hover {
+  border: 1px solid #bfbfbf;
+  background-color: white;
+  box-shadow: 2px 2px 2px 2px #d4d1d1;
+  transition: 0.25s;
+}
+
+.app {
+  margin: 0px 150px 0px 150px;
+}
+
+.balance {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+  font-size: 30px;
+}
