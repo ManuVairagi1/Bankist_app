@@ -3,3 +3,29 @@
   margin: 0;
   box-sizing: border-box;
 }
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap");
+
+body {
+  padding: 1rem;
+  font-family: "Noto Sans", sans-serif;
+}
+nav {
+  display: flex;
+  justify-content: space-around;
+}
+
+.welcome {
+  font-size: 30px;
+  font-weight: 500;
+  margin-top: 25px;
+}
+
+.login_input {
+  height: 30px;
+  text-align: center;
+  margin-top: 25px;
+  padding: 20px;
+  border: 1px black solid;
+  border-radius: 20px;
+  margin-left: 20px;
+}
