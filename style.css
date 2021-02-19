@@ -89,12 +89,12 @@ nav {
   max-width: 100rem;
   margin: 4rem auto;
   display: grid;
-  /* grid-template-columns: 3fr 3fr; */
-  /* grid-template-rows: auto repeat(3, 15rem) auto; */
+  grid-template-columns: 4fr 3fr;
+  grid-template-rows: auto repeat(3, 15rem) auto;
   gap: 2rem;
 
   /* NOTE This creates the fade in/out anumation */
-  /* opacity: 0; */
+
   transition: all 1s;
 }
 
@@ -134,6 +134,7 @@ nav {
   padding: 2.25rem 4rem;
   display: flex;
   align-items: center;
+  overflow: hidden;
   border-bottom: 1px solid #eee;
 }
 
@@ -169,7 +170,7 @@ nav {
 
 /* SUMMARY */
 .summary {
-  grid-row: 5;
+  grid-row: 5 / 6;
   display: flex;
   align-items: baseline;
   padding: 0 0.3rem;
@@ -290,7 +291,6 @@ h2 {
   margin-top: 1.9rem;
   text-align: right;
   font-size: 1.25rem;
-  grid-column: 2;
 }
 
 .timer {
