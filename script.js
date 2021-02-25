@@ -64,13 +64,32 @@ const displayMovements = function (movements) {
           <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
-          <div class="movements__value">${mov} $</div>
+          <div class="movements__value">${mov} Rs </div>
         </div>`;
 
     containerMovements.insertAdjacentHTML("afterbegin", html);
   });
 };
 displayMovements(account1.movements);
+
+const calcDisplaySummary = function (movements) {
+  const incomes = movements
+    .filter((mov) => mov > 0)
+    .reduce((acc, mov) => acc + mov);
+  labelSumIn.textContent = `${incomes}Rs`;
+
+  const outcomes = movements
+    .filter((mov) => mov < 0)
+    .reduce((acc, mov) => acc + mov);
+  labelSumOut.textContent = `${outcomes}Rs`;
+
+  const interest = movements
+    .filter((mov) => mov > 0)
+    .map((mov) => (mov * 1.2) / 100)
+    .reduce((acc, mov) => acc + mov);
+  labelSumInterest.textContent = `${Math.floor(interest)}Rs`;
+};
+calcDisplaySummary(account1.movements);
 
 const calcDisplayBalance = function (movements) {
   const balance = movements.reduce((acc, mov) => acc + mov);
@@ -204,3 +223,46 @@ GOOD LUCK */
 // }, 0);
 
 // console.log(balance);
+
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 654, 489, 54, -985];
+
+// const dollarTorupee = 75;
+// const totalDeposit = movements
+//   .map((mov) => mov * dollarTorupee)
+//   .filter((mov) => {
+//     return mov > 0;
+//   })
+//   .reduce(function (acc, cur) {
+//     return acc + cur;
+//   }, 0);
+
+// console.log(totalDeposit);
+
+// Let's go back to Julia and Kate's study about dogs. This time, they want to convert dog ages to human ages and calculate the average age of the dogs in their study.
+
+// Create a function 'calcAverageHumanAge', which accepts an arrays of dog's ages ('ages'), and does the following things in order:
+
+// 1. Calculate the dog age in human years using the following formula: if the dog is <= 2 years old, humanAge = 2 * dogAge. If the dog is > 2 years old, humanAge = 16 + dogAge * 4.
+// 2. Exclude all dogs that are less than 18 human years old (which is the same as keeping dogs that are at least 18 years old)
+// 3. Calculate the average human age of all adult dogs (you should already know from other challenges how we calculate averages 😉)
+// 4. Run the function for both test datasets
+
+// TEST DATA 1: [5, 2, 4, 1, 15, 8, 3]
+// TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
+
+// GOOD LUCK 😀
+
+const calcAverageHumanAge = function (ages) {
+  let humanAge = 0;
+   const dogAge = ages.map(function (age) {
+   const calc = function(){
+    if (age <= 2) {
+      humanAge = 2 * age;
+    } else {
+      humanAge = 16 + age * 4;
+    }
+    console.log(ages);
+  };
+  
+});
+
