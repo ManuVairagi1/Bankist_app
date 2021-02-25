@@ -70,7 +70,11 @@ const displayMovements = function (movements) {
     containerMovements.insertAdjacentHTML("afterbegin", html);
   });
 };
-displayMovements(account1.movements);
+
+const calcDisplayBalance = function (movements) {
+  acc = movements.reduce((acc, mov) => acc + mov, 0);
+  labelBalance.textContent = `${acc}€`;
+};
 
 const calcDisplaySummary = function (movements) {
   const incomes = movements
@@ -89,13 +93,47 @@ const calcDisplaySummary = function (movements) {
     .reduce((acc, mov) => acc + mov);
   labelSumInterest.textContent = `${Math.floor(interest)}Rs`;
 };
-calcDisplaySummary(account1.movements);
 
-const calcDisplayBalance = function (movements) {
-  const balance = movements.reduce((acc, mov) => acc + mov);
-  labelBalance.textContent = `${balance}$`;
+//display usernames
+
+const usernames = function (accs) {
+  accs.forEach(function (acc) {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(" ")
+      .map((word) => word[0])
+      .join("");
+  });
 };
-calcDisplayBalance(account1.movements);
+usernames(accounts);
+
+//Event Handlers
+let currentAccount;
+btnLogin.addEventListener("click", function (e) {
+  //this prevent form from submitting...
+  e.preventDefault();
+
+  currentAccount = accounts.find(
+    (acc) => acc.username === inputLoginUsername.value
+  );
+
+  console.log(currentAccount);
+
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    //display UI and message
+    labelWelcome.textContent = `Welcome Back ${currentAccount.owner}`;
+    containerApp.style.opacity = 100;
+
+    //Display movements
+    displayMovements(currentAccount.movements);
+    //Display balance
+    calcDisplayBalance(currentAccount.movements);
+
+    //display summary
+
+    calcDisplaySummary(currentAccount.movements);
+  }
+});
 
 //lectures, not the part of application that we are building. 😀😀
 //CODING CHALLANGE
@@ -252,17 +290,16 @@ GOOD LUCK */
 
 // GOOD LUCK 😀
 
-const calcAverageHumanAge = function (ages) {
-  let humanAge = 0;
-   const dogAge = ages.map(function (age) {
-   const calc = function(){
-    if (age <= 2) {
-      humanAge = 2 * age;
-    } else {
-      humanAge = 16 + age * 4;
-    }
-    console.log(ages);
-  };
-  
-});
+// const calcAverageHumanAge = function (ages) {
+//   let humanAge = 0;
+//    const dogAge = ages.map(function (age) {
+//    const calc = function(){
+//     if (age <= 2) {
+//       humanAge = 2 * age;
+//     } else {
+//       humanAge = 16 + age * 4;
+//     }
+//     console.log(ages);
+//   };
 
+// });
