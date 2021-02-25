@@ -72,6 +72,13 @@ const displayMovements = function (movements) {
 };
 displayMovements(account1.movements);
 
+const calcDisplayBalance = function (movements) {
+  const balance = movements.reduce((acc, mov) => acc + mov);
+  labelBalance.textContent = `${balance}$`;
+};
+calcDisplayBalance(account1.movements);
+
+//lectures, not the part of application that we are building. 😀😀
 //CODING CHALLANGE
 /* 
 Julia and Kate are doing a study on dogs. So each of them asked 5 dog owners about their dog's age, and stored the data into an array (one array for each). For now, they are just interested in knowing whether a dog is an adult or a puppy. A dog is an adult if it is at least 3 years old, and it's a puppy if it's less than 3 years old.
@@ -96,20 +103,104 @@ TEST DATA 2: Julia's data [9, 16, 6, 8, 3], Kate's data [10, 5, 6, 1, 4]
 
 GOOD LUCK */
 
-const checkDogs = function (dogsJulia, dogskate) {
-  dogsJuliacorrect = dogsJulia.slice(1, 3);
-  console.log(dogsJuliacorrect);
+// const checkDogs = function (dogsJulia, dogskate) {
+//   dogsJuliacorrect = dogsJulia.slice(1, 3);
+//   console.log(dogsJuliacorrect);
 
-  const dogs = [...dogsJuliacorrect, ...dogskate];
+//   const dogs = [...dogsJuliacorrect, ...dogskate];
 
-  dogs.foreach(function (dog, i) {
-    if (dogs > 3) {
-      console.log(`Dog number ${i + 1} is an adult, and is ${dog} years old`);
-    } else {
-      console.log(`Dog number ${i + 1}  is still a puppy 🐶`);
-    }
-  });
-};
+//   dogs.foreach(function (dog, i) {
+//     if (dogs > 3) {
+//       console.log(`Dog number ${i + 1} is an adult, and is ${dog} years old`);
+//     } else {
+//       console.log(`Dog number ${i + 1}  is still a puppy 🐶`);
+//     }
+//   });
+// };
 
-const dogsjulia = [3, 5, 2, 12, 7];
-const dogskate = [4, 1, 15, 8, 3];
+// const dogsjulia = [3, 5, 2, 12, 7];
+// const dogskate = [4, 1, 15, 8, 3];
+
+//map method
+//consider values of the array in dollars and we have to convert them into rupees,
+// 1 dollar = 75 rupees.
+
+// const movements = [
+//   200,
+//   450,
+//   -400,
+//   3000,
+//   -650,
+//   -130,
+//   70,
+//   1300,
+//   654,
+//   489,
+//   54,
+//   -985,
+// ];
+// const dollarTorupee = 75;
+
+// const movementsRupee = movements.map(function (mov) {
+//   return mov * dollarTorupee;
+// });
+
+// console.log({ movementsRupee });
+
+// const user = "Steven Thomas Williams";
+
+// const username = user
+//   .toLocaleLowerCase()
+//   .split(" ")
+//   .map(function (name) {
+//     return name[0];
+//   })
+//   .join("");
+// console.log(username);
+
+// const user1 = "Mahendra Singh Dhoni";
+
+// const usernames = function (accs) {
+//   accs.forEach(function (acc) {
+//     acc.username = acc.owner
+//       .toLowerCase()
+//       .split(" ")
+//       .map((word) => word[0])
+//       .join("");
+//   });
+// };
+// usernames(accounts);
+// console.log(accounts);
+
+// //filter method
+
+// const movements = [
+//   200,
+//   450,
+//   -400,
+//   3000,
+//   -650,
+//   -130,
+//   70,
+//   1300,
+//   654,
+//   489,
+//   54,
+//   -985,
+// ];
+// const withdrawals = movements.filter(function (mov) {
+//   return mov < 0;
+// });
+
+// console.log(withdrawals);
+
+// //reduce method
+// console.log(movements);
+
+// const balance = movements.reduce(function (acc, cur, i, arr) {
+//   console.log(acc);
+
+//   return acc + cur;
+// }, 0);
+
+// console.log(balance);
