@@ -135,6 +135,27 @@ btnLogin.addEventListener("click", function (e) {
   }
 });
 
+//handeling transfers
+
+btnTransfer.addEventListener("click", function (e) {
+  e.preventDefault();
+  console.log("lkj");
+
+  const amount = Number(inputTransferAmount.value);
+  const receiverAcc = accounts.find(
+    (acc) => acc.username === inputTransferTo.value
+  );
+
+  if (
+    amount > 0 &&
+    receiverAcc &&
+    receiverAcc?.username !== currentAccount.username &&
+    currentAccount.balance >= amount
+  ) {
+    console.log("valid");
+  }
+});
+
 //lectures, not the part of application that we are building. 😀😀
 //CODING CHALLANGE
 /* 
