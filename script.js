@@ -71,27 +71,38 @@ const displayMovements = function (movements) {
   });
 };
 
-const calcDisplayBalance = function (movements) {
-  acc = movements.reduce((acc, mov) => acc + mov, 0);
-  labelBalance.textContent = `${acc}€`;
+const calcDisplayBalance = function (acc) {
+  acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
+  labelBalance.textContent = `${acc.balance}€`;
 };
 
-const calcDisplaySummary = function (movements) {
-  const incomes = movements
+const calcDisplaySummary = function (acc) {
+  const incomes = acc.movements
     .filter((mov) => mov > 0)
     .reduce((acc, mov) => acc + mov);
   labelSumIn.textContent = `${incomes}Rs`;
 
-  const outcomes = movements
+  const outcomes = acc.movements
     .filter((mov) => mov < 0)
     .reduce((acc, mov) => acc + mov);
   labelSumOut.textContent = `${outcomes}Rs`;
 
-  const interest = movements
+  const interest = acc.movements
     .filter((mov) => mov > 0)
     .map((mov) => (mov * 1.2) / 100)
     .reduce((acc, mov) => acc + mov);
   labelSumInterest.textContent = `${Math.floor(interest)}Rs`;
+};
+//update UI
+const updateUI = function (acc) {
+  //Display movements
+  displayMovements(acc.movements);
+  //Display balance
+  calcDisplayBalance(acc);
+
+  //display summary
+
+  calcDisplaySummary(acc);
 };
 
 //display usernames
@@ -123,16 +134,9 @@ btnLogin.addEventListener("click", function (e) {
     //display UI and message
     labelWelcome.textContent = `Welcome Back ${currentAccount.owner}`;
     containerApp.style.opacity = 100;
-
-    //Display movements
-    displayMovements(currentAccount.movements);
-    //Display balance
-    calcDisplayBalance(currentAccount.movements);
-
-    //display summary
-
-    calcDisplaySummary(currentAccount.movements);
   }
+
+  updateUI(currentAccount);
 });
 
 //handeling transfers
@@ -145,15 +149,43 @@ btnTransfer.addEventListener("click", function (e) {
   const receiverAcc = accounts.find(
     (acc) => acc.username === inputTransferTo.value
   );
+  inputTransferAmount.value = inputTransferTo.value = "";
 
   if (
     amount > 0 &&
-    receiverAcc &&
+    // receiverAcc &&
     receiverAcc?.username !== currentAccount.username &&
     currentAccount.balance >= amount
   ) {
-    console.log("valid");
+    //doing the transfer
+    currentAccount.movements.push(-amount);
+    receiverAcc.movements.push(amount);
+
+    //updating UI
+    updateUI(currentAccount);
   }
+});
+
+//closing the account
+btnClose.addEventListener("click", function (e) {
+  e.preventDefault();
+  console.log("deleted");
+
+  if (
+    inputCloseUsername.value === currentAccount.username &&
+    Number(inputClosePin.value) === currentAccount.pin
+  ) {
+    const index = accounts.findIndex(
+      (acc) => acc.username === currentAccount.username
+    );
+
+    accounts.splice(index, 1);
+
+    //hide UI
+    containerApp.style.opacity = 0;
+    //clear input fields
+  }
+  inputCloseUsername.value = inputClosePin.value = "";
 });
 
 //lectures, not the part of application that we are building. 😀😀
