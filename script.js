@@ -104,6 +104,8 @@ const updateUI = function (acc) {
   //display summary
 
   calcDisplaySummary(acc);
+  //timer
+  logOutTimer();
 };
 
 //display usernames
@@ -128,8 +130,6 @@ btnLogin.addEventListener("click", function (e) {
   currentAccount = accounts.find(
     (acc) => acc.username === inputLoginUsername.value
   );
-
-  console.log(currentAccount);
 
   if (currentAccount?.pin === Number(inputLoginPin.value)) {
     //display UI and message
@@ -209,6 +209,32 @@ btnClose.addEventListener("click", function (e) {
   }
   inputCloseUsername.value = inputClosePin.value = "";
 });
+
+// making a logout timer
+const logOutTimer = function () {
+  //set timer to 5 min
+
+  let time = 300;
+
+  //Call the timer every second
+  const timer = setInterval(function () {
+    const min = String(Math.trunc(time / 60)).padStart(2, 0);
+    const sec = String(time % 60).padStart(2, 0);
+
+    //In each call, pring the time to UI
+    labelTimer.textContent = `${min}:${sec}`;
+    //decrease 1 sec
+    time--;
+
+    //when 0 seconds , log out the user  and stop timer
+    if (time === 0) {
+      clearInterval(timer);
+      containerApp.style.opacity = 0;
+      inputLoginUsername.value = inputLoginPin.value = "";
+      labelWelcome.textContent = "Log in to get started";
+    }
+  }, 1000);
+};
 
 ///lectures, not the part of application that we are building. 😀😀
 //CODING CHALLANGE
