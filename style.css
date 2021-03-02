@@ -222,6 +222,14 @@ nav {
   background-image: linear-gradient(to top left, #39b385, #9be15d);
 }
 
+.loanApproved {
+  font-size: 16px;
+  display: flex;
+  justify-content: space-around;
+  opacity: 0;
+  transition: 0.2s ease;
+}
+
 .operation--close {
   background-image: linear-gradient(to top left, #e52a5a, #ff585f);
 }

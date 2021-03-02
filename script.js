@@ -53,6 +53,7 @@ const inputTransferAmount = document.querySelector(".form__input--amount");
 const inputLoanAmount = document.querySelector(".form__input--loan-amount");
 const inputCloseUsername = document.querySelector(".form__input--user");
 const inputClosePin = document.querySelector(".form__input--pin");
+const loanApproved = document.querySelector(".loanApproved");
 
 const displayMovements = function (movements) {
   containerMovements.innerHTML = "";
@@ -177,10 +178,13 @@ btnLoan.addEventListener("click", function (e) {
       return acc >= loanAmount * 0.1;
     })
   ) {
-    currentAccount.movements.push(loanAmount);
-    //update UI
-    updateUI(currentAccount);
-    console.log("done");
+    setTimeout(function () {
+      currentAccount.movements.push(loanAmount);
+      //update UI
+      updateUI(currentAccount);
+      console.log("done");
+      loanApproved.style.opacity = 100;
+    }, 10000);
   }
 });
 
